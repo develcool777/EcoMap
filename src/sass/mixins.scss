@@ -1,0 +1,29 @@
+@mixin FCenter($position) {
+	display: flex;
+	justify-content: $position;
+	align-items: center;
+}
+
+// высчитывания px в rem
+@function rem($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}rem;
+}
+
+
+@mixin After($height, $color, $px) {
+  display: block;
+  content: "";
+	position: absolute;
+	height: $height;
+	background-color: $color;
+	bottom: rem($px);
+
+	width: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: width .3s ease-in-out;
+}
+
+
+
+
