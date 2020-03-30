@@ -44,7 +44,7 @@ export default {
   }
   &__svg:hover {
     cursor: pointer;
-    fill:red;
+    fill: $red;
   }
 }
 </style>

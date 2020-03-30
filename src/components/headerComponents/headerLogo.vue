@@ -23,9 +23,6 @@ export default {
     text-transform: uppercase;
     transition-duration: .5s;
   }
-  // &__name:hover {
-  //   color: red;
-  // }
   svg path {
   fill:inherit;
   stroke:inherit;
@@ -37,18 +34,15 @@ export default {
     width: 25px;
     height: 25px;
   }
-  // &__svg:hover {
-  //   fill:red;
-  // }
 }
 .headerLogo:hover {
   cursor: pointer;
 }
 
 .headerLogo:hover .headerLogo__svg {
-  fill:red;
+  fill: $red;
 }
 .headerLogo:hover .headerLogo__name {
-  color: red;
+  color: $red;
 }
 </style>

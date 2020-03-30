@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import HeaderLogo from '@/components/headerLogo'
-import HeaderMenu from '@/components/headerMenu'
-import HeaderAccLanSer from '@/components/headerAccLanSer'
+import HeaderLogo from '@/components/headerComponents/headerLogo'
+import HeaderMenu from '@/components/headerComponents/headerMenu'
+import HeaderAccLanSer from '@/components/headerComponents/headerAccLanSer'
 export default {
   name: 'Header',
   components: {
@@ -25,7 +25,6 @@ export default {
 </script>
 <style lang="scss">
 .header {
-  background-color: $backgroundColor;
   padding: rem(10) 0;
   &__flex {
     @include FCenter(space-between);

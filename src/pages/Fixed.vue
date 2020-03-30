@@ -1,6 +1,6 @@
 <template>
   <div class="fixed">
-    <Header/>
+    <Header :style="{ background: light }"/>
     <Fixed/>
     <Footer/>
   </div>
@@ -16,6 +16,11 @@ export default {
     Header,
     Footer,
     Fixed
+  },
+  data () {
+    return {
+      light: '#201F30'
+    }
   }
 }
 </script>
