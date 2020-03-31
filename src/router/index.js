@@ -1,14 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import FFixed from '../pages/Fixed.vue'
+import Fixed from '../pages/Fixed.vue'
+import Event from '../pages/Events.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'FFixed',
-    component: FFixed
+    path: '/Fixed',
+    name: 'Fixed',
+    component: Fixed
+  },
+  {
+    path: '/Event',
+    name: 'Event',
+    component: Event
   }
   // {
   //   path: '/about',

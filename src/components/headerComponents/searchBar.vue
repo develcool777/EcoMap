@@ -28,8 +28,6 @@ export default {
     show () {
       this.active = !this.active
     }
-  },
-  mounted(that = this) {
   }
 }
 </script>
@@ -58,8 +56,8 @@ export default {
   }
   &__modal {
     float: right;
-    margin: rem(35) rem(40) 0 0;
-    width: rem(436);
+    margin: rem(35) rem(50) 0 0;
+    width: rem(410);
     height: rem(37);
     z-index: 2;
     @include FCenter(space-between);
@@ -89,11 +87,12 @@ export default {
     background-color: transparent;
   }
   &__input {
-    padding-left: rem(14);
+    padding-left: rem(12);
     width: 100%;
     opacity: 0.6;
   }
   &__btn {
+    padding-right: rem(10);
     display: inline-block;
     transition-duration: .5s;
   }

@@ -12,8 +12,8 @@ export default {
       navbars: [
         { names: 'Home', router: '/xx' },
         { names: 'Issues', router: '/xx' },
-        { names: 'Fixed', router: '/xx' },
-        { names: 'Events', router: '/xx' },
+        { names: 'Fixed', router: '/Fixed' },
+        { names: 'Events', router: '/Event' },
         { names: 'Donate', router: '/xx' },
         { names: 'Contacts', router: '/xx' }
       ]
