@@ -16,16 +16,14 @@
         </select> -->
       </form>
       <div class="contentFixed__items">
-        <Item v-for="item in dataItems"  :key="item.id" :fitem="item"/>
+        <Item v-for="(item, index) in dataItems"  :key="index" :fitem="item"/>
       </div>
-      <Pagination/>
     </div>  <!-- wrapper -->
   </div>   <!-- contentFixed -->
 </template>
 
 <script>
 import Item from '@/components/specialComponents/Item'
-import Pagination from '@/components/specialComponents/pagination'
 export default {
   name: 'FixedContent',
   data () {
@@ -39,8 +37,7 @@ export default {
     default: () => []
   },
   components: {
-    Item,
-    Pagination
+    Item
   },
   computed: {
     computedObj () {
@@ -54,7 +51,6 @@ export default {
 </script>
 <style lang="scss">
 .contentFixed {
-  background-color: $backgroundColor;
   &__title {
     text-align: center;
     padding: rem(20) 0 rem(45);

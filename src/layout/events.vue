@@ -16,16 +16,14 @@
         </select> -->
       </form>
       <div class="contentEvent__items">
-        <Item v-for="item in dataItems"  :key="item.id" :fitem="item"/>
+        <Item v-for="(item, index) in dataItems"  :key="index" :fitem="item"/>
       </div>
-      <Pagination/>
     </div>  <!-- wrapper -->
   </div>   <!--contentEvent -->
 </template>
 
 <script>
 import Item from '@/components/specialComponents/Item'
-import Pagination from '@/components/specialComponents/pagination'
 export default {
   name: 'EventContent',
   data () {
@@ -35,8 +33,7 @@ export default {
     }
   },
   components: {
-    Item,
-    Pagination
+    Item
   },
   props: {
     dataItems: Array,
@@ -54,7 +51,6 @@ export default {
 </script>
 <style lang="scss">
 .contentEvent {
-  background-color: $dark;
   &__title {
     text-align: center;
     padding: rem(20) 0 rem(45);

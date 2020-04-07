@@ -1,46 +1,78 @@
 <template>
   <div class="fixed">
-    <Header :style="{ background: light }"/>
+    <Header/>
     <FixedContent :dataItems="items"/>
+    <Pagination :current="currentPage" :total="totalItem" :per-page="perPage" @page-changed="items"/>
     <Footer/>
   </div>
 </template>
 
 <script>
 import Header from '@/layout/header'
-import Footer from '@/layout/footer'
 import FixedContent from '@/layout/fixed'
+import Pagination from '@/components/specialComponents/pagination'
+import Footer from '@/layout/footer'
+import axios from 'axios'
+const baseURL = 'http://localhost:7000/items'
 export default {
   name: 'Fixed',
   components: {
     Header,
     Footer,
-    FixedContent
+    FixedContent,
+    Pagination
   },
   data () {
     return {
       light: '#201F30',
-      items: [
-        { id: 0, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 1, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 2, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 3, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 4, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 5, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 6, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 7, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 8, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 9, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 10, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 11, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 12, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 13, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 14, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 },
-        { id: 15, url: 'img1.png', title: 'Majorka beach', trash: 'Trash', place: 'Beach', date: '25.01.2020', text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.', btn: 'Read more', rating: 4.1 }
-      ]
+      photos: [],
+      totalItem: 16,
+      perPage: 3,
+      currentPage: 1,
+      items: []
+    }
+  },
+  async created () {
+    try {
+      const res = await axios.get(baseURL)
+      this.items = res.data
+      console.log(res.data)
+      console.log(res.status)
+      console.log(res.statusText)
+      console.log(res.headers)
+      console.log(res.config)
+    } catch (e) {
+      console.error(e)
     }
   }
+  // methods: {
+  //   fetchPhotos: function(page) {
+  //     // var options = {
+  //       // params: {
+  //         // client_id: appId,
+  //       //   page: page,
+  //       //   per_page: this.perPage
+  //       // }
+  //     // }
+
+  //     this.$http.get('https://api.unsplash.com/photos', options).then(function(response) {
+
+  //       this.photos = response.data
+
+  //       this.totalPhotos = parseInt(response.headers.get('x-total'))
+
+  //       this.currentPage = page
+
+  //     }, console.log)
+  //   }
+  // },
+  // created () {
+  //   this.fetchPhotos(this.currentPage)
+  // }
 }
 </script>
 <style lang="scss">
+.fixed {
+  background-color: $backgroundColor;
+}
 </style>

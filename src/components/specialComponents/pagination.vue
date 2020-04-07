@@ -1,14 +1,14 @@
 <template>
   <div class="Pagination">
-<!--         <li class="Pagination__item">
-          <div type="button" class="Pagination__prev" @click="page--"></div>
+        <li class="Pagination__item">
+          <div class="Pagination__prev" v-if="hasPrev()" @click.prevent="changePage(prevPage)"></div>
+        </li>
+        <li class="Pagination__item" v-for="(page, i) in pages" :key="i">
+          <button class="Pagination__number" @click.prevent="changePage(page)" :class="{ current: current == page }"> {{ page }} </button>
         </li>
         <li class="Pagination__item">
-          <button type="button" class="Pagination__number" v-for="pageNumber in pages.slice(page-1, page+2)" @click="page = pageNumber"> {{pageNumber}} </button>
+          <div class="Pagination__next" v-if="hasNext()" @click.prevent="changePage(nextPage)"></div>
         </li>
-        <li class="Pagination__item">
-          <div type="button" @click="page++" v-if="page < pages.length" class="Pagination__next"></div>
-        </li> -->
   </div>
 </template>
 
@@ -16,52 +16,72 @@
 export default {
   name: 'Pagination',
   data () {
-    return {
-      posts: [''],
-      page: 1,
-      perPage: 10,
-      pages: []
-    }
+    return {}
   },
-  methods: {
-    // getPosts () {
-    //   let data = [];
-    //   for (let i = 0; i < 200; i++) {
-    //     this.posts.push({first: 'John',last:'Doe', suffix:'#' + i})
-    //   }
-    // },
-    setPages () {
-      const numberOfPages = Math.ceil(this.posts.length / this.perPage)
-      for (let index = 1; index <= numberOfPages; index++) {
-        this.pages.push(index)
-      }
+  props: {
+    current: {
+      type: Number,
+      default: 1
     },
-    paginate (posts) {
-      const page = this.page
-      const perPage = this.perPage
-      const from = (page * perPage) - perPage
-      const to = (page * perPage)
-      return posts.slice(from, to)
+    total: {
+      type: Number,
+      default: 0
+    },
+    perPage: {
+      type: Number,
+      default: 9
+    },
+    pageRange: {
+      type: Number,
+      default: 1
     }
   },
   computed: {
-    displayedPosts () {
-      return this.paginate(this.posts)
+    pages () {
+      var pages = []
+
+      for (var i = this.rangeStart; i <= this.rangeEnd; i++) {
+        pages.push(i)
+      }
+      return pages
+    },
+    rangeStart () {
+      var start = this.current - this.pageRange
+
+      return (start > 0) ? start : 1
+    },
+    rangeEnd () {
+      var end = this.current + this.pageRange
+
+      return (end < this.totalPages) ? end : this.totalPages
+    },
+    totalPages () {
+      return Math.ceil(this.total / this.perPage)
+    },
+    nextPage () {
+      return this.current + 1
+    },
+    prevPage () {
+      return this.current - 1
     }
   },
-  watch: {
-    posts () {
-      this.setPages()
+  methods: {
+    // hasFirst: function() {
+    //   return this.rangeStart !== 1
+    // },
+    // hasLast: function() {
+    //   return this.rangeEnd < this.totalPages
+    // },
+    hasPrev () {
+      return this.current > 1
+    },
+    hasNext () {
+      return this.current < this.totalPages
+    },
+    changePage (page) {
+      this.$emit('page-changed', page)
     }
-  },
-  created () {
-    this.getPosts()
   }
-  // filters: {
-  //   trimWords(value){
-  //     return value.split(" ").splice(0,20).join(" ") + '...';
-  //   }
-  // }
 }
 </script>
 <style lang="scss">
@@ -96,5 +116,12 @@ export default {
     border-color: transparent transparent transparent $red;
     cursor: pointer;
   }
+  &__number {
+    cursor: pointer;
+  }
+}
+.current {
+  border-color: #ea4c89;
+  color: #ea4c89;
 }
 </style>
