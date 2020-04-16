@@ -1,4 +1,8 @@
 {
+      "dataForFilter": {
+          "select": ["Country", "Region", "City"],
+          "option": ["Ukraine", "Spain", "Kievska", "New York", "Kiev", "Chernivtsi"]
+      },
     "items": [
         { "id": 0,
           "url": "img1.png",
@@ -80,5 +84,5 @@
           "btn": "Read more", 
           "rating": 4.1 
       }
-    ]    
+    ]
 }

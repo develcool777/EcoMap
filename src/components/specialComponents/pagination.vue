@@ -1,13 +1,13 @@
 <template>
   <div class="Pagination">
         <li class="Pagination__item">
-          <div class="Pagination__prev" v-if="hasPrev()" @click.prevent="changePage(prevPage)"></div>
+          <div class="Pagination__prev" v-if="hasPrev()" @click.prevent="changePage(pagePrev)"></div>
         </li>
-        <li class="Pagination__item" v-for="(page, i) in pages" :key="i">
-          <button class="Pagination__number" @click.prevent="changePage(page)" :class="{ current: current == page }"> {{ page }} </button>
+        <li class="Pagination__item" v-for="(page, i) in pages()" :key="i">
+          <button class="Pagination__number" @click.prevent="changePage(page)" :class="{ current: current == page }"> {{ page + 1 }} </button>
         </li>
         <li class="Pagination__item">
-          <div class="Pagination__next" v-if="hasNext()" @click.prevent="changePage(nextPage)"></div>
+          <div class="Pagination__next" v-if="hasNext()" @click.prevent="changePage(pageNext)"></div>
         </li>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
       type: Number,
       default: 1
     },
-    total: {
+    totalItems: {
       type: Number,
       default: 0
     },
@@ -36,36 +36,29 @@ export default {
       default: 1
     }
   },
-  computed: {
-    pages () {
-      var pages = []
-
-      for (var i = this.rangeStart; i <= this.rangeEnd; i++) {
-        pages.push(i)
-      }
-      return pages
+  methods: {
+    pageFirst () {
+      return 0
     },
-    rangeStart () {
-      var start = this.current - this.pageRange
-
-      return (start > 0) ? start : 1
+    pageLast () {
+      return this.totalPages()
     },
-    rangeEnd () {
-      var end = this.current + this.pageRange
-
-      return (end < this.totalPages) ? end : this.totalPages
+    pageId () {
+      return Math.max(Math.min(this.current, this.pageLast()), this.pageFirst())
     },
     totalPages () {
-      return Math.ceil(this.total / this.perPage)
+      return Math.ceil(this.totalItems / this.perPage)
     },
-    nextPage () {
-      return this.current + 1
+    pageNext () {
+      return Math.min(this.pageLast(), this.pageId() + 1)
     },
-    prevPage () {
-      return this.current - 1
-    }
-  },
-  methods: {
+    pagePrev () {
+      return Math.max(this.pageFirst(), this.pageId() - 1)
+    },
+    pages () {
+      return Array.from(Array(2 * this.pageRange + 1), (_, i) => i - this.pageRange + this.pageId())
+        .filter(i => this.pageFirst() <= i && i <= this.pageLast())
+    },
     // hasFirst: function() {
     //   return this.rangeStart !== 1
     // },
@@ -73,10 +66,10 @@ export default {
     //   return this.rangeEnd < this.totalPages
     // },
     hasPrev () {
-      return this.current > 1
+      return this.pageId() > this.pageFirst()
     },
     hasNext () {
-      return this.current < this.totalPages
+      return this.pageId() < this.pageLast()
     },
     changePage (page) {
       this.$emit('page-changed', page)
@@ -118,10 +111,19 @@ export default {
   }
   &__number {
     cursor: pointer;
+    transition-duration: .5s;
+    border-bottom: 1px solid transparent;
+  }
+  &__number:focus {
+    outline: none;
+  }
+  &__number:hover {
+    border-bottom: 1px solid $red;
+    color: $red;
   }
 }
 .current {
-  border-color: #ea4c89;
-  color: #ea4c89;
+  color: red;
+  border-bottom: 1px solid red;
 }
 </style>

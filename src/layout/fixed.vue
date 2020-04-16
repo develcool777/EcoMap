@@ -2,19 +2,13 @@
   <div class="contentFixed">
     <div class="wrapper">
       <div class="contentFixed__title">Fixed issues</div>
-      <form class="contentFixed__filters" >
-        <div class="contentFixed__filterItem" v-for="i in 3" :key="i">
-          <select name="" id="" class="contentFixed__select">
-            <option v-for="(c, i) in computedObj" :key="i" :value="c" class="hals__option" >{{ c }}</option>
-          </select>
-        </div>
-        <!-- <select name="" id="" class="contentFixed__select">
-          <option v-for="(r, i) in regions" :key="i" :value="r" class="hals__option" >{{ r }}</option>
-        </select>
-        <select name="" id="" class="contentFixed__select">
-          <option v-for="(c, i) in cites" :key="i" :value="c" class="hals__option" >{{ c }}</option>
-        </select> -->
-      </form>
+      <div class="contentFixed__filters">
+        <Select  @selectedOption1="optionSelected"
+                 @selectedOption2="optionSelected"
+                 @selectedOption3="optionSelected"
+                  :dataFilter="datas"/>
+        <p class="contentFixed__filter" v-if="showCFilter" >{{filter}}</p>
+      </div>
       <div class="contentFixed__items">
         <Item v-for="(item, index) in dataItems"  :key="index" :fitem="item"/>
       </div>
@@ -24,27 +18,27 @@
 
 <script>
 import Item from '@/components/specialComponents/Item'
+import Select from '@/components/specialComponents/Select'
 export default {
   name: 'FixedContent',
   data () {
     return {
-      limit: 2,
-      data: ['Country', 'Ukraine', 'Spain', 'Region', 'Kievska', 'New York', 'City', 'Kiev', 'Chernivtsi']
+      showCFilter: false,
+      filter: 'Clear Filters'
     }
   },
   props: {
     dataItems: Array,
+    datas: Object,
     default: () => []
   },
   components: {
-    Item
+    Item,
+    Select
   },
-  computed: {
-    computedObj () {
-      var f = this.data.slice(0, 3)
-      var r = this.data.slice(3, 6)
-      var t = this.data.slice(6, 9)
-      return (f, r, t)
+  methods: {
+    optionSelected (opt) {
+      this.showCFilter = true
     }
   }
 }
@@ -61,20 +55,12 @@ export default {
     line-height: 63px;
   }
   &__filters {
-    @include FCenter(space-between);
-    width: rem(350);
+    @include FCenter(flex-start);
   }
-  &__filterItem {
-    position: relative;
-  }
-  &__select {
+  &__filter {
     cursor: pointer;
-    outline: none;
     color: $white;
     font-size: rem(20);
-    background: none;
-    border: none;
-    appearance: none;
   }
   &__items {
     @include FCenter(space-between);
