@@ -1,12 +1,11 @@
 <template>
-  <div class="fixed">
+  <div class="Fixed">
     <Header/>
-    <FixedContent :dataItems="items" :datas="dataForFilter"/>
+    <FixedContent :dataItems="items" :dataFilter="{cities, regions, countries}"/>
     <Pagination :current="currentPage()" :totalItems="totalItem" :perPage="perPage" @page-changed="changePage"/>
     <Footer/>
   </div>
 </template>
-
 <script>
 import Header from '@/layout/header'
 import FixedContent from '@/layout/fixed'
@@ -14,7 +13,9 @@ import Pagination from '@/components/specialComponents/Pagination'
 import Footer from '@/layout/footer'
 import axios from 'axios'
 const baseURL = 'http://localhost:3000/items'
-const baseURL2 = 'http://localhost:3000/dataForFilter'
+const baseURL2 = 'http://localhost:3000/countries'
+const baseURL3 = 'http://localhost:3000/regions'
+const baseURL4 = 'http://localhost:3000/cities'
 export default {
   name: 'Fixed',
   components: {
@@ -29,7 +30,9 @@ export default {
       perPage: 3,
       current: 1,
       items: [],
-      dataForFilter: {}
+      countries: [],
+      regions: [],
+      cities: []
     }
   },
   methods: {
@@ -40,26 +43,26 @@ export default {
       this.current = page
     }
   },
-  created () {
-    axios.all([
-      axios.get(baseURL),
-      axios.get(baseURL2)
-    ])
-      .then((responses) => {
-        const temp1 = responses[0]
-        const temp2 = responses[1]
-        const tempItems = temp1.data
-        this.items = tempItems.slice(this.totalItem - this.perPage)
-        this.dataForFilter = temp2.data
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
+  async created () {
+    try {
+      const [items, countries, regions, cities] = await axios.all([
+        axios.get(baseURL),
+        axios.get(baseURL2),
+        axios.get(baseURL3),
+        axios.get(baseURL4)
+      ])
+      this.items = items.data
+      this.countries = countries.data
+      this.regions = regions.data
+      this.cities = cities.data
+    } catch (e) {
+      this.errors.push(e)
+    }
   }
 }
 </script>
 <style lang="scss">
-.fixed {
+.Fixed {
   background-color: $backgroundColor;
 }
 </style>

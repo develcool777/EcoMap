@@ -2,13 +2,7 @@
   <div class="contentFixed">
     <div class="wrapper">
       <div class="contentFixed__title">Fixed issues</div>
-      <div class="contentFixed__filters">
-        <Select  @selectedOption1="optionSelected"
-                 @selectedOption2="optionSelected"
-                 @selectedOption3="optionSelected"
-                  :dataFilter="datas"/>
-        <p class="contentFixed__filter" v-if="showCFilter" >{{filter}}</p>
-      </div>
+        <Filters :dataFilter="dataFilter"/>
       <div class="contentFixed__items">
         <Item v-for="(item, index) in dataItems"  :key="index" :fitem="item"/>
       </div>
@@ -18,23 +12,21 @@
 
 <script>
 import Item from '@/components/specialComponents/Item'
-import Select from '@/components/specialComponents/Select'
+import Filters from '@/components/specialComponents/Filters'
 export default {
   name: 'FixedContent',
   data () {
     return {
-      showCFilter: false,
-      filter: 'Clear Filters'
     }
   },
   props: {
     dataItems: Array,
-    datas: Object,
+    dataFilter: Object,
     default: () => []
   },
   components: {
     Item,
-    Select
+    Filters
   },
   methods: {
     optionSelected (opt) {

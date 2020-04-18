@@ -43,6 +43,7 @@ export default {
   &__svg:hover {
     fill: $red;
     cursor: pointer;
+    transform: rotate(360deg);
   }
   &__mask {
     display: block;

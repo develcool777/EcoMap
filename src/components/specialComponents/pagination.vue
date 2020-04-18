@@ -123,7 +123,7 @@ export default {
   }
 }
 .current {
-  color: red;
-  border-bottom: 1px solid red;
+  color: $red;
+  border-bottom: 1px solid $red;
 }
 </style>

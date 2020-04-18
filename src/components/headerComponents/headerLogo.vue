@@ -40,6 +40,7 @@ export default {
 }
 
 .headerLogo:hover .headerLogo__svg {
+  transform: rotate(360deg);
   fill: $red;
 }
 .headerLogo:hover .headerLogo__name {
