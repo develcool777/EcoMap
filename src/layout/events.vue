@@ -4,27 +4,39 @@
       <div class="contentEvent__title">Events</div>
         <Filters :dataFilter="dataFilter"/>
       <div class="contentEvent__items">
-        <Item v-for="(item, index) in dataItems"  :key="index" :fitem="item"/>
+        <DataPicker :style="{order: 2}" :value="value" :render="render" :start="start" :end="end"/>
+        <Item  v-for="(item, i) in dataItems" :key="i" :fitem="item" :style="{order: i + 1 + (i > 0)}"/>
       </div>
     </div>  <!-- wrapper -->
   </div>   <!--contentEvent -->
 </template>
 <script>
+import moment from 'moment'
 import Item from '@/components/specialComponents/Item'
 import Filters from '@/components/specialComponents/Filters'
+import DataPicker from '@/components/specialComponents/dataPicker'
 export default {
   name: 'EventContent',
   data () {
     return {
+      value: moment().locale('en').add(1, 'month'),
+      start: null,
+      end: null
     }
   },
   components: {
     Item,
-    Filters
+    Filters,
+    DataPicker
   },
   props: {
     dataItems: Array,
     dataFilter: Object
+  },
+  methods: {
+    render (value, date) {
+      return value
+    }
   }
 }
 </script>

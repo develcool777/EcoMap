@@ -2,7 +2,7 @@
   <div class="Select">
     <div tabindex="0" class="Select__selected" @click="clicked()">{{selectedItem().name}}</div>
     <span class="Select__box" v-if="show">
-      <p class="Select__option" v-if="itemByDefault"  @click="selectItem(0)">{{defaultItem}}</p>
+      <p class="Select__option" v-if="itemByDefault()"  @click="selectItem(0)">{{defaultItem}}</p>
       <p class="Select__option" v-for="({id, name}, i) in items" :key="i" @click="selectItem(id)">{{name}}</p>
     </span>
   </div>
@@ -12,8 +12,7 @@ export default {
   name: 'Select',
   data () {
     return {
-      show: false,
-      itemByDefault: false
+      show: false
     }
   },
   props: {
@@ -23,6 +22,9 @@ export default {
     select: Function
   },
   methods: {
+    itemByDefault () {
+      return this.selected > 0
+    },
     selectedItem () {
       const item = this.items.find(item => item.id === this.selected) || {
         id: 0,
@@ -35,13 +37,7 @@ export default {
     },
     selectItem (id) {
       this.select(id)
-      this.$emit('selectedOpion', id)
       this.show = false
-      if (id > 0) {
-        this.itemByDefault = true
-      } else {
-        this.itemByDefault = false
-      }
     },
     hide () {
       this.show = false
@@ -75,7 +71,7 @@ export default {
     color: $white;
     text-overflow: ellipsis;
     overflow: hidden;
-    // transition-duration: .5s;
+    transition: color .5s;
   }
   &__selected:after {
     position: absolute;
@@ -102,6 +98,7 @@ export default {
   }
   &__selected:hover {
     cursor: pointer;
+    color: $red;
   }
   &__box {
     width: rem(200); // or 100%

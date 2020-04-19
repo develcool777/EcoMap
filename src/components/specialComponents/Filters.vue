@@ -5,22 +5,18 @@
             :selected="selected.countries"
             :items="dataFilter.countries"
             :select="select('countries')"
-            @selectedOpion="snowFilter"
     />
     <Select :defaultItem="'Region'"
             :selected="selected.regions"
             :items="dataFilter.regions"
             :select="select('regions')"
-            @selectedOpion="snowFilter"
     />
     <Select :defaultItem="'City'"
             :selected="selected.cities"
             :items="dataFilter.cities"
             :select="select('cities')"
-            @selectedOpion="snowFilter"
     />
     </div>
-    <!-- :hideOptions="hideFilter" -->
       <p class="Filters__filter" v-if="showCFilter" @click="hideFilter">{{filter}}</p>
   </section>
 </template>
@@ -46,21 +42,16 @@ export default {
     dataFilter: Object
   },
   methods: {
-    snowFilter (id) {
-      if (id > 0) {
-        this.showCFilter = true
-      } else {
-        this.showCFilter = false
-      }
-    },
-    hideFilter (id) {
+    hideFilter () {
       this.showCFilter = false
-      id = 0
-      return id
+      this.selected.countries = 0
+      this.selected.regions = 0
+      this.selected.cities = 0
     },
     select (key) {
       return (id) => {
         this.selected[key] = id
+        this.showCFilter = Object.values(this.selected).some(i => i)
       }
     },
     selectDefault: () => {
@@ -81,9 +72,13 @@ export default {
   }
   &__filter {
     margin-left: rem(10);
-    cursor: pointer;
     color: $white;
     font-size: rem(20);
+    transition-duration: .5s;
+  }
+  &__filter:hover {
+    cursor: pointer;
+    color: $red;
   }
 }
 </style>
