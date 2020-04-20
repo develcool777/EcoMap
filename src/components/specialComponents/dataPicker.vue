@@ -6,16 +6,16 @@
     </div>
     <div class="DataPicker__box">
       <div class="DataPicker__monthes">
-        <p class="DataPicker__month" v-for="(month, index) in monthes()" :key="index">{{month}}</p>
+        <span class="DataPicker__month" v-for="({title, value, current, date}, index) in monthes()" :class="current ? 'DataPicker__month--current' : ''" :key="index" @click.prevent="select(date)">{{title}}</span>
       </div>
       <div class="DataPicker__week">
         <div class="DataPicker__weekdays">
-          <span class="DataPicker__weekprev"></span>
-          <p class="DataPicker__weekday" v-for="(weekday, index) in daysOfWeek()" :key="index">{{weekday}}</p>
-          <span class="DataPicker__weeknext"></span>
+          <span class="DataPicker__weekprev" @click.prevent="select({offset: -1, unit: 'month'})"></span>
+          <p class="DataPicker__weekday" v-for="({title, value, current}, index) in daysOfWeek()" :class="current ? 'DataPicker__weekday--current' : ''" :key="index" >{{title}}</p>
+          <span class="DataPicker__weeknext" @click.prevent="select({offset: +1, unit: 'month'})"></span>
         </div>
         <div class="DataPicker__days">
-          <p class="DataPicker__day" v-for="(monthday, index) in daysOfMonth()" :key="index" >{{monthday}}</p>
+          <p class="DataPicker__day" v-for="({title, value, current, date}, index) in daysOfMonth()" :key="index" @click.prevent="select(date)">{{render ? render({title, date, current}) : title}}</p>
         </div>
       </div>
     </div>
@@ -30,10 +30,22 @@ export default {
     }
   },
   props: {
+    locale: {
+      type: String,
+      required: false,
+      default: 'en'
+    },
     value: moment,
-    render: Function,
+    render: {
+      type: Function,
+      required: true
+    },
     start: {
       type: moment,
+      required: false
+    },
+    onSelect: {
+      type: Function,
       required: false
     },
     end: {
@@ -42,37 +54,57 @@ export default {
     }
   },
   methods: {
-    amount (value, of, unit) {
-      return -value.diff(moment(value).add(1, of), unit)
-    },
-    format (value, of, unit, format) {
-      return (_, i) => moment(value).startOf(of).add(i, unit).format(format)
-    },
     monthes () {
-      const monthes = this.amount(this.value, 'year', 'month')
-      const format = this.format(this.value, 'year', 'month', 'MMMM')
-      return Array.from(Array(monthes), format)
+      const value = moment(this.value).locale(this.locale)
+      const value2month = value.month()
+      const value2day = value.date()
+      return Array(12).fill().map((_, i) => {
+        const data = moment(value).startOf('year').add(i, 'months').add(value2day, 'days')
+        return {
+          title: data.format('MMMM'),
+          date: data,
+          value: data.month(),
+          current: data.month() === value2month
+        }
+      })
     },
     daysOfWeek () {
-      const days = this.amount(this.value, 'week', 'day')
-      const format = this.format(this.value, 'week', 'day', 'dd')
-      return Array.from(Array(days), format)
+      const value = moment(this.value).locale(this.locale)
+      const value2weekday = value.weekday()
+      return Array(7).fill().map((_, i) => {
+        const data = moment(value).startOf('week').add(i, 'days')
+        return {
+          title: data.format('dd'),
+          value: data.weekday(),
+          cuurnt: data.weekday() === value2weekday
+        }
+      })
     },
     daysOfMonth () {
-      const days = this.amount(this.value, 'month', 'day')
-      const format = this.format(this.value, 'month', 'day', 'D/w/e')
-      let result = Array.from(Array(days), format).reduce((scope, item) => {
-        const [day, weekId, dayOfWeek] = item.split('/')
-        if (!scope[+weekId]) {
-          scope[+weekId] = Array(7).fill('')
+      const value = moment(this.value).locale(this.locale)
+      const value2month = value.month()
+      const value2day = value.date()
+      const d1 = moment(value).startOf('month').startOf('week')
+      const d2 = moment(value).startOf('month').add(1, 'month').startOf('week').add(1, 'week')
+      return Array(d2.diff(d1, 'days')).fill().map((_, i) => {
+        const data = moment(d1).add(i, 'days')
+        return data.month() === value2month ? {
+          title: data.format('D'),
+          date: data,
+          value: data.date(),
+          current: data.date() === value2day
+        } : {
+          date: data
         }
-        scope[+weekId][+dayOfWeek] = this.render(day, moment(this.value).date(+day))
-        return scope
-      }, {})
-      result = Object.values(result)
-      console.log(result)
-      result = [].concat(...result)
-      return result
+      })
+    },
+    select (date) {
+      if (date instanceof moment) {
+        this.onSelect && this.onSelect(date)
+      } else if (date instanceof Object) {
+        const { offset, unit } = date
+        this.select(moment(this.value).add(+offset, unit))
+      }
     }
   }
 }
@@ -97,6 +129,7 @@ export default {
   }
   &__box {
     display: flex;
+    margin-top: rem(5);
     height: rem(358);
     border: 1px solid $white;
   }
@@ -105,13 +138,23 @@ export default {
     flex-direction: column;
     width: rem(180);
     overflow: scroll;
-    color: $white;
     border-right: 1px solid $white;
-    padding: rem(10) 0 rem(15);
+    padding: rem(10) 0 rem(15) rem(24);
   }
   &__month {
-    margin-left: rem(24);
+    display: inline-block;
     font-size: rem(14);
+    color: $white;
+    line-height: rem(20);
+    transition-duration: .5s;
+    &--current {
+      font-weight: bold;
+      color: $red;
+    }
+  }
+  &__month:hover {
+    color: $red;
+    cursor: pointer;
   }
   &__month:not(:first-child) {
     margin-top: rem(15);
@@ -121,11 +164,11 @@ export default {
     flex-direction: column;
     color: $white;
     padding: rem(10) rem(24) 0;
-
   }
   &__weekdays {
     @include FCenter(space-between);
     // margin: 5px auto;  what???
+// padding-bottom: 5px;
     position: relative;
     width: rem(330);
   }
@@ -166,17 +209,34 @@ export default {
   }
   &__days {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap;
     margin: rem(15) auto;
-    width: rem(308);
+    width: rem(290);
   }
   &__day {
-    width: calc(100%/7);
+    width: rem(36);
+    // width: calc(100%/7);
+    // height: rem(20);
+    padding: rem(9) 0;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    margin: rem(5) 0;
+    text-align: center;
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
-
+    font-size: rem(16);
+    line-height: rem(20);
+    transition-duration: .5s;
+  }
+  &__day:empty {
+    border: none;
+  }
+  &__day:not(:empty):hover {
+    cursor: pointer;
+    border-color: $white;
+    color: black;
+    background-color: $white;
   }
 }
 </style>

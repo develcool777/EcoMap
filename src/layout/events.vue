@@ -4,7 +4,7 @@
       <div class="contentEvent__title">Events</div>
         <Filters :dataFilter="dataFilter"/>
       <div class="contentEvent__items">
-        <DataPicker :style="{order: 2}" :value="value" :render="render" :start="start" :end="end"/>
+        <DataPicker :style="{order: 2}" :value="value" :render="render" :start="start" :end="end" :onSelect="onSelect" />
         <Item  v-for="(item, i) in dataItems" :key="i" :fitem="item" :style="{order: i + 1 + (i > 0)}"/>
       </div>
     </div>  <!-- wrapper -->
@@ -19,7 +19,7 @@ export default {
   name: 'EventContent',
   data () {
     return {
-      value: moment().locale('en').add(1, 'month'),
+      value: moment().locale('en'),
       start: null,
       end: null
     }
@@ -34,8 +34,18 @@ export default {
     dataFilter: Object
   },
   methods: {
-    render (value, date) {
-      return value
+    now (date) {
+      const diff = moment().diff(date, 'hours')
+      return diff >= 0 && diff < 24
+    },
+    render ({ title, date, current }) {
+      if (date && date.isValid() && this.now(date)) {
+        return `!${title}`
+      }
+      return title
+    },
+    onSelect (data) {
+      this.value = data
     }
   }
 }
