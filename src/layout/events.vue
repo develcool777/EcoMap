@@ -3,9 +3,9 @@
     <div class="wrapper">
       <div class="contentEvent__title">Events</div>
         <Filters :dataFilter="dataFilter"/>
-      <div class="contentEvent__items">
-        <DataPicker :style="{order: 2}" :value="value" :render="render" :start="start" :end="end" :onSelect="onSelect" />
-        <Item  v-for="(item, i) in dataItems" :key="i" :fitem="item" :style="{order: i + 1 + (i > 0)}"/>
+      <div class="contentEvent__items" :style="{height: (orderDataPicker() * 240) + 'px'}">
+        <DataPicker :style="{order: orderDataPicker()}" :value="value" :render="render" :start="start" :end="end" :onSelect="onSelect" />
+        <Item  v-for="(item, i) in dataItems" :key="i" :fitem="item" :style="{order: orderItem(i)}"/>
       </div>
     </div>  <!-- wrapper -->
   </div>   <!--contentEvent -->
@@ -46,6 +46,13 @@ export default {
     },
     onSelect (data) {
       this.value = data
+    },
+    orderItem (index) {
+      const middle = this.orderDataPicker()
+      return index < middle ? index : index + 1
+    },
+    orderDataPicker () {
+      return Math.ceil((this.dataItems.length + 2) / 2.0)
     }
   }
 }
@@ -63,6 +70,7 @@ export default {
   }
   &__items {
     @include FCenter(space-between);
+    flex-direction: column;
     flex-wrap: wrap;
     padding: rem(40) 0;
   }

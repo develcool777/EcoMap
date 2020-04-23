@@ -56,47 +56,41 @@ export default {
   methods: {
     monthes () {
       const value = moment(this.value).locale(this.locale)
-      const value2month = value.month()
-      const value2day = value.date()
-      return Array(12).fill().map((_, i) => {
-        const data = moment(value).startOf('year').add(i, 'months').add(value2day, 'days')
-        return {
-          title: data.format('MMMM'),
-          date: data,
-          value: data.month(),
-          current: data.month() === value2month
-        }
-      })
+      return Array(12).fill(value)
+        .map((d, i) => moment(d).month(0).add(i, 'months'))
+        .map(d => ({
+          title: d.format('MMMM'),
+          date: d,
+          value: d.month(),
+          current: d.month() === value.month()
+        }))
     },
     daysOfWeek () {
       const value = moment(this.value).locale(this.locale)
-      const value2weekday = value.weekday()
-      return Array(7).fill().map((_, i) => {
-        const data = moment(value).startOf('week').add(i, 'days')
-        return {
-          title: data.format('dd'),
-          value: data.weekday(),
-          cuurnt: data.weekday() === value2weekday
-        }
-      })
+      return Array(7).fill(value)
+        .map((d, i) => moment(d).weekday(0).add(i, 'days'))
+        .map(d => ({
+          title: d.format('dd'),
+          value: d.weekday(),
+          cuurnt: d.weekday() === value.weekday()
+        }))
     },
     daysOfMonth () {
       const value = moment(this.value).locale(this.locale)
-      const value2month = value.month()
-      const value2day = value.date()
-      const d1 = moment(value).startOf('month').startOf('week')
-      const d2 = moment(value).startOf('month').add(1, 'month').startOf('week').add(1, 'week')
-      return Array(d2.diff(d1, 'days')).fill().map((_, i) => {
-        const data = moment(d1).add(i, 'days')
-        return data.month() === value2month ? {
-          title: data.format('D'),
-          date: data,
-          value: data.date(),
-          current: data.date() === value2day
-        } : {
-          date: data
-        }
-      })
+      const d1 = moment(value).date(1).weekday(0)
+      const d2 = moment(value).date(1).add(1, 'month').add(-1, 'days').weekday(0).add(1, 'week')
+      return Array(d2.diff(d1, 'days')).fill(d1)
+        .map((d, i) => moment(d).add(i, 'days'))
+        .map(d => {
+          return d.month() === value.month() ? {
+            title: d.format('D'),
+            date: d,
+            value: d.date(),
+            current: d.date() === value.date()
+          } : {
+            date: d
+          }
+        })
     },
     select (date) {
       if (date instanceof moment) {
@@ -115,6 +109,7 @@ export default {
   display: inline-block;
   font-weight: normal;
   width: rem(560);
+  margin-bottom: rem(45);
   &__selected {
     @include FCenter(flex-start);
     color: $white;
@@ -147,14 +142,18 @@ export default {
     color: $white;
     line-height: rem(20);
     transition-duration: .5s;
+    cursor: pointer;
     &--current {
+      cursor: default;
       font-weight: bold;
-      color: $red;
+      color: $whiter;
     }
   }
   &__month:hover {
     color: $red;
-    cursor: pointer;
+    &--current:hover {
+      color: $whiter;
+    }
   }
   &__month:not(:first-child) {
     margin-top: rem(15);
@@ -216,8 +215,6 @@ export default {
   }
   &__day {
     width: rem(36);
-    // width: calc(100%/7);
-    // height: rem(20);
     padding: rem(9) 0;
     border-radius: 50%;
     border: 1px solid transparent;
@@ -227,10 +224,7 @@ export default {
     font-weight: normal;
     font-size: rem(16);
     line-height: rem(20);
-    transition-duration: .5s;
-  }
-  &__day:empty {
-    border: none;
+    transition: border-color .5s, background-color .5s;
   }
   &__day:not(:empty):hover {
     cursor: pointer;

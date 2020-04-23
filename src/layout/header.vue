@@ -4,7 +4,7 @@
       <div class="header__flex">
         <HeaderLogo/>
         <HeaderMenu/>
-        <HeaderAccLanSer/>
+        <HeaderAccLanSer :languages="languages"/>
       </div>
     </div>
   </header>
@@ -20,6 +20,15 @@ export default {
     HeaderLogo,
     HeaderMenu,
     HeaderAccLanSer
+  },
+  data () {
+    return {
+      languages: [
+        { id: 1, name: 'EN' },
+        { id: 2, name: 'RU' },
+        { id: 3, name: 'UA' }
+      ]
+    }
   }
 }
 </script>

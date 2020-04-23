@@ -1,13 +1,13 @@
 <template>
   <div class="Pagination">
         <li class="Pagination__item">
-          <div class="Pagination__prev" v-if="hasPrev()" @click.prevent="changePage(pagePrev)"></div>
+          <div class="Pagination__prev" v-if="hasPrev()" @click.prevent="changePage(pagePrev())"></div>
         </li>
         <li class="Pagination__item" v-for="(page, i) in pages()" :key="i">
           <button class="Pagination__number" @click.prevent="changePage(page)" :class="{ current: current == page }"> {{ page + 1 }} </button>
         </li>
         <li class="Pagination__item">
-          <div class="Pagination__next" v-if="hasNext()" @click.prevent="changePage(pageNext)"></div>
+          <div class="Pagination__next" v-if="hasNext()" @click.prevent="changePage(pageNext())"></div>
         </li>
   </div>
 </template>
