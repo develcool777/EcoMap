@@ -5,7 +5,7 @@
         <Filters :dataFilter="dataFilter"/>
       <div class="contentEvent__items" :style="{height: (orderDataPicker() * 240) + 'px'}">
         <DataPicker :style="{order: orderDataPicker()}" :value="value" :render="render" :start="start" :end="end" :onSelect="onSelect" />
-        <Item  v-for="(item, i) in dataItems" :key="i" :fitem="item" :style="{order: orderItem(i)}"/>
+        <Item v-for="(item, i) in dataItems" :key="i" :fitem="item" :style="{order: orderItem(i)}"/>
       </div>
     </div>  <!-- wrapper -->
   </div>   <!--contentEvent -->
@@ -69,7 +69,8 @@ export default {
     line-height: 63px;
   }
   &__items {
-    @include FCenter(space-between);
+    display: flex;
+    align-content: space-between;
     flex-direction: column;
     flex-wrap: wrap;
     padding: rem(40) 0;

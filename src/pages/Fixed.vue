@@ -9,7 +9,7 @@
 <script>
 import Header from '@/layout/header'
 import FixedContent from '@/layout/fixed'
-import Pagination from '@/components/specialComponents/Pagination'
+import Pagination from '@/components/specialComponents/Paginate'
 import Footer from '@/layout/footer'
 import axios from 'axios'
 const baseURL = 'http://localhost:3000/items'

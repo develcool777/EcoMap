@@ -13,9 +13,7 @@
     "json-server": "^0.16.1",
     "moment": "^2.24.0",
     "vue": "^2.6.11",
-    "vue-paginate": "^3.6.0",
-    "vue-router": "^3.1.5",
-    "vue-simple-pagination": "^1.0.1"
+    "vue-router": "^3.1.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",

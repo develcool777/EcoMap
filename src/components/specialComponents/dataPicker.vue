@@ -132,12 +132,27 @@ export default {
     display: flex;
     flex-direction: column;
     width: rem(180);
-    overflow: scroll;
+    overflow-y: scroll;
     border-right: 1px solid $white;
-    padding: rem(10) 0 rem(15) rem(24);
+    // padding: rem(10) 0 rem(15) rem(24);
+    padding: 0 0 0 rem(24);
+  }
+  &__monthes::-webkit-scrollbar {
+      display: block;
+      width: 5px;
+  }
+  &__monthes::-webkit-scrollbar-track {
+      background: none;
+  }
+  &__monthes::-webkit-scrollbar-thumb {
+      background-color: $white;
+      border-radius: 10px 0 0 10px;
+      border-right: none;
+      border-left: none;
   }
   &__month {
     display: inline-block;
+    margin-top: rem(15);
     font-size: rem(14);
     color: $white;
     line-height: rem(20);
@@ -154,9 +169,6 @@ export default {
     &--current:hover {
       color: $whiter;
     }
-  }
-  &__month:not(:first-child) {
-    margin-top: rem(15);
   }
   &__week {
     display: flex;

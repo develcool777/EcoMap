@@ -80,4 +80,6 @@ export default {
     cursor: pointer;
   }
 }
+.Item:nth-child() {
+}
 </style>
