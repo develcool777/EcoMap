@@ -1,7 +1,7 @@
 <template>
   <div class="Event">
     <Header/>
-    <EventContent :dataItems="items" :dataFilter="{cities, regions, countries}"/>
+    <EventContent :dataItems="items" :dataFilter="{cities, regions, countries, problems}"/>
     <Pagination :current="currentPage()" :totalItems="totalItem" :perPage="perPage" @page-changed="changePage"/>
     <Footer/>
   </div>
@@ -13,9 +13,6 @@ import Pagination from '@/components/specialComponents/Paginate'
 import Footer from '@/layout/footer'
 import axios from 'axios'
 const baseURL = 'http://localhost:3000/items'
-const baseURL2 = 'http://localhost:3000/countries'
-const baseURL3 = 'http://localhost:3000/regions'
-const baseURL4 = 'http://localhost:3000/cities'
 export default {
   name: 'Event',
   components: {
@@ -30,9 +27,22 @@ export default {
       perPage: 3,
       current: 1,
       items: [],
-      countries: [],
-      regions: [],
-      cities: []
+      countries: [
+        { id: 1, name: 'Ukraine' },
+        { id: 2, name: 'Spain' }
+      ],
+      regions: [
+        { id: 1, name: 'Kievska' },
+        { id: 2, name: 'New York' }
+      ],
+      cities: [
+        { id: 1, name: 'Kiev' },
+        { id: 2, name: 'Chernivtsi' }
+      ],
+      problems: [
+        { id: 1, name: 'first' },
+        { id: 2, name: 'second' }
+      ]
     }
   },
   methods: {
@@ -45,16 +55,8 @@ export default {
   },
   async created () {
     try {
-      const [items, countries, regions, cities] = await axios.all([
-        axios.get(baseURL),
-        axios.get(baseURL2),
-        axios.get(baseURL3),
-        axios.get(baseURL4)
-      ])
+      const items = await axios.get(baseURL)
       this.items = items.data
-      this.countries = countries.data
-      this.regions = regions.data
-      this.cities = cities.data
     } catch (e) {
       this.errors.push(e)
     }

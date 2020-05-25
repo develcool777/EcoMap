@@ -94,6 +94,7 @@ export default {
     cursor: pointer;
     display: block;
     position: absolute;
+    z-index: 1;
     color: $white;
     border: 1px solid $white;
   }

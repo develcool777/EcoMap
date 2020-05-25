@@ -115,7 +115,9 @@ export default {
     color: $white;
   }
   &__select {
-    padding: rem(25) rem(50) rem(25) rem(15);
+    width: rem(180);
+    padding: rem(25) 0;
+    text-align: center;
     border: 1px solid $grayDP;
   }
   &__select:last-child {
@@ -163,6 +165,9 @@ export default {
       font-weight: bold;
       color: $whiter;
     }
+  }
+  &__month:last-child {
+    margin-bottom: rem(15);
   }
   &__month:hover {
     color: $red;

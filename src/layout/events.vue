@@ -1,13 +1,28 @@
 <template>
   <div class="contentEvent">
     <div class="wrapper">
-      <div class="contentEvent__title">Events</div>
+      <div class="contentEvent__title">
+        <p>Events</p>
+        <svg @click="show" class="contentEvent__svg" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.5 12.5H30V17.5H17.5V30H12.5V17.5H0V12.5H12.5V0H17.5V12.5Z" />
+        </svg>
+      </div>
         <Filters :dataFilter="dataFilter"/>
       <div class="contentEvent__items" :style="{height: (orderDataPicker() * 240) + 'px'}">
         <DataPicker :style="{order: orderDataPicker()}" :value="value" :render="render" :start="start" :end="end" :onSelect="onSelect" />
         <Item v-for="(item, i) in dataItems" :key="i" :fitem="item" :style="{order: orderItem(i)}"/>
       </div>
     </div>  <!-- wrapper -->
+    <transition name="fade" appear>
+    <div class="contentEvent__mask" v-if="active" @click.self="show">
+      <form action="post" class="contentEvent__modal">
+        <div class="contentEvent__block">
+          <div class="contentEvent__titleModal">Add new event</div>
+          <div class="contentEvent__btn">Add event</div>
+        </div>
+      </form>
+     </div>
+   </transition>
   </div>   <!--contentEvent -->
 </template>
 <script>
@@ -21,7 +36,8 @@ export default {
     return {
       value: moment().locale('en'),
       start: null,
-      end: null
+      end: null,
+      active: false
     }
   },
   components: {
@@ -34,6 +50,9 @@ export default {
     dataFilter: Object
   },
   methods: {
+    show () {
+      this.active = !this.active
+    },
     now (date) {
       const diff = moment().diff(date, 'hours')
       return diff >= 0 && diff < 24
@@ -59,14 +78,31 @@ export default {
 </script>
 <style lang="scss">
 .contentEvent {
-  &__title {
-    text-align: center;
-    padding: rem(20) 0 rem(45);
+  &__svg {
+    position: absolute;
+    top: 45%;
+    right: 0;
+    margin-top: -15px;
+    height: rem(30);
+    transition-duration: .5s;
+    fill: $white;
+  }
+  &__svg:hover {
+    fill: $red;
+    cursor: pointer;
+    transform: rotate(360deg);
+  }
+  &__titleModal, &__title {
     color: $white;
     font-style: normal;
     font-weight: 500;
     font-size: rem(52);
     line-height: 63px;
+    text-align: center;
+  }
+  &__title {
+    position: relative;
+    padding: rem(20) 0 rem(45);
   }
   &__items {
     display: flex;
@@ -75,5 +111,45 @@ export default {
     flex-wrap: wrap;
     padding: rem(40) 0;
   }
+  &__mask {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.1);
+  }
+  &__modal {
+    margin: 0 auto;
+    padding: rem(20) 0 rem(40);
+    width: rem(600);
+    height: rem(640);
+    background-color: black;
+    z-index: 2;
+  }
+  &__btn {
+    width: rem(112);
+    margin: 0 auto;
+    padding: rem(8) rem(94);
+    border: 2px solid $white;
+    color: $white;
+    text-align: center;
+    font-size: rem(20);
+    transition-duration: .5s;
+  }
+  &__btn:hover {
+    background-color: $white;
+    color: black;
+    cursor: pointer;
+  }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>

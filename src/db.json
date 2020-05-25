@@ -11,110 +11,115 @@
       {"id": 1, "name": "Kiev"},
       {"id": 2, "name": "Chernivtsi"}
     ],
+    "problems": [
+      {"id": 1, "name": "first"},
+      {"id": 2, "name": "second"}
+    ],
     "items": [
-        { "id": 1,
-          "countryId": 1,
-          "regionId": 2,
-          "cityId": 1,
+      {
+        "id": 1,
+        "issue": {
+          "id": 1,
+          "title": "Beach trash",
+          "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
           "url": "img1.png",
-          "title": "Majorka beach", 
-          "trash": "Trash", 
-          "place": "Beach", 
-          "date": "25.01.2020", 
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 
-          "btn": "Read more", 
-          "rating": 4.1 
+          "state": "new",
+          "date": "2000-01-01",
+          "pollution_category": "trash",
+          "pollution_rating": 3.8,
+          "budget": null,
+          "comments": 12
+        }
+      },  
+      {
+        "id": 2,
+        "issue": {
+          "id": 2,
+          "title": "Beach trash",
+          "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
+          "url": "img1.png",
+          "state": "new",
+          "date": "2000-01-01",
+          "pollution_category": "trash",
+          "pollution_rating": 3.8,
+          "budget": null,
+          "comments": 12
+        }
       },
-        { "id": 2,
-          "countryId": 1,
-          "regionId": null,
-          "cityId": 1,
+      {
+        "id": 3,
+        "issue": {
+          "id": 3,
+          "title": "Beach trash",
+          "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
           "url": "img1.png",
-          "title": "Majorka beach", 
-          "trash": "Trash", 
-          "place": "Beach", 
-          "date": "25.01.2020", 
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 
-          "btn": "Read more", 
-          "rating": 4.1 
+          "state": "new",
+          "date": "2000-01-01",
+          "pollution_category": "trash",
+          "pollution_rating": 3.8,
+          "budget": null,
+          "comments": 12
+        }
       },
-        { "id": 3,
-          "countryId": 1,
-          "regionId": 2,
-          "cityId": 1,
+      {
+        "id": 4,
+        "issue": {
+          "id": 4,
+          "title": "Beach trash",
+          "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
           "url": "img1.png",
-          "title": "Majorka beach", 
-          "trash": "Trash", 
-          "place": "Beach", 
-          "date": "25.01.2020", 
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 
-          "btn": "Read more", 
-          "rating": 4.1 
+          "state": "new",
+          "date": "2000-01-01",
+          "pollution_category": "trash",
+          "pollution_rating": 3.8,
+          "budget": null,
+          "comments": 12
+        }
       },
-        { "id": 4,
-          "countryId": 1,
-          "regionId": 2,
-          "cityId": null,
+      {
+        "id": 5,
+        "issue": {
+          "id": 5,
+          "title": "Beach trash",
+          "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
           "url": "img1.png",
-          "title": "Majorka beach", 
-          "trash": "Trash", 
-          "place": "Beach", 
-          "date": "25.01.2020", 
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 
-          "btn": "Read more", 
-          "rating": 4.1 
+          "state": "new",
+          "date": "2000-01-01",
+          "pollution_category": "trash",
+          "pollution_rating": 3.8,
+          "budget": null,
+          "comments": 12
+        }
       },
-        { "id": 5,
-          "countryId": 1,
-          "regionId": 2,
-          "cityId": 1,
+      {
+        "id": 6,
+        "issue": {
+          "id": 6,
+          "title": "Beach trash",
+          "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
           "url": "img1.png",
-          "title": "Majorka beach", 
-          "trash": "Trash", 
-          "place": "Beach", 
-          "date": "25.01.2020", 
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 
-          "btn": "Read more", 
-          "rating": 4.1 
+          "state": "new",
+          "date": "2000-01-01",
+          "pollution_category": "trash",
+          "pollution_rating": 3.8,
+          "budget": null,
+          "comments": 12
+        }
       },
-        { "id": 6,
-          "countryId": 1,
-          "regionId":null,
-          "cityId": 1,
+      {
+        "id": 7,
+        "issue": {
+          "id": 7,
+          "title": "Beach trash",
+          "description": "helpful description",
           "url": "img1.png",
-          "title": "Majorka beach", 
-          "trash": "Trash", 
-          "place": "Beach", 
-          "date": "25.01.2020", 
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 
-          "btn": "Read more", 
-          "rating": 4.1 
-      },
-        { "id": 7,
-          "countryId": 1,
-          "regionId": 2,
-          "cityId": 1,
-          "url": "img1.png",
-          "title": "Majorka beach", 
-          "trash": "Trash", 
-          "place": "Beach", 
-          "date": "25.01.2020", 
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 
-          "btn": "Read more", 
-          "rating": 4.1 
-      },
-        { "id": 8,
-          "countryId": 1,
-          "regionId": 2,
-          "cityId": null,
-          "url": "img1.png",
-          "title": "Majorka beach", 
-          "trash": "Trash", 
-          "place": "Beach", 
-          "date": "25.01.2020", 
-          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.", 
-          "btn": "Read more", 
-          "rating": 4.1 
-      }
+          "state": "new",
+          "date": "2000-01-01",
+          "pollution_category": "trash",
+          "pollution_rating": 3.8,
+          "budget": null,
+          "comments": 12
+        }
+      } 
     ]
 }

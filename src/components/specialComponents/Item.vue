@@ -1,15 +1,15 @@
 <template>
   <div class="Item">
-    <img :src=" require('../../assets/Items/' + fitem.url )" alt="image" class="Item__img">
+    <img :src=" require('../../assets/Items/' + fitem.issue.url )" alt="image" class="Item__img">
     <div class="Item__info">
-      <div class="Item__title">{{ fitem.title }}</div>
+      <div class="Item__title">{{ fitem.issue.title }}</div>
       <div class="Item__datePlace">
-        <div class="Item__trash">{{ fitem.trash }} / {{ fitem.place }}</div>
-        <div class="Item__date">{{ fitem.date }}</div>
+        <div class="Item__trash">{{ fitem.issue.pollution_category }}</div>
+        <div class="Item__date">{{ fitem.issue.date }}</div>
       </div>
-      <div class="Item__pollution">Polution rating: {{ fitem.rating }}</div>
-      <div class="Item__text">{{ fitem.text }}</div>
-      <button class="Item__btn">{{ fitem.btn }}</button>
+      <div class="Item__pollution">Polution rating: {{ fitem.issue.pollution_rating }}</div>
+      <div class="Item__text">{{ fitem.issue.description }}</div>
+      <button class="Item__btn">Read more</button>
     </div>
   </div>
 </template>
@@ -26,7 +26,8 @@ export default {
 </script>
 <style lang="scss">
 .Item {
-  @include FCenter(space-between);
+  display: flex;
+  justify-content: space-between;
   margin: 0 0 rem(40);
   width: rem(560);
   color: $gray;
@@ -48,6 +49,10 @@ export default {
   }
   &__datePlace, &__text {
     padding: rem(5) 0;
+  }
+  &__text {
+    max-height: rem(70);
+    overflow: hidden;
   }
   &__btn {
     border: none;
@@ -79,7 +84,5 @@ export default {
     border-color: $red;
     cursor: pointer;
   }
-}
-.Item:nth-child() {
 }
 </style>

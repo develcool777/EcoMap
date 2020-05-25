@@ -16,6 +16,11 @@
             :items="dataFilter.cities"
             :select="select('cities')"
     />
+    <Select :defaultItem="'Problem'"
+            :selected="selected.problems"
+            :items="dataFilter.problems"
+            :select="select('problems')"
+    />
     </div>
       <p class="Filters__filter" v-if="showCFilter" @click="hideFilter">{{filter}}</p>
   </section>
@@ -32,7 +37,8 @@ export default {
       selected: {
         countries: 0,
         regions: 0,
-        cities: 0
+        cities: 0,
+        problems: 0
       },
       showCFilter: false,
       filter: 'Clear Filters'
@@ -47,6 +53,7 @@ export default {
       this.selected.countries = 0
       this.selected.regions = 0
       this.selected.cities = 0
+      this.selected.problems = 0
     },
     select (key) {
       return (id) => {
@@ -68,7 +75,7 @@ export default {
   @include FCenter(flex-start);
   &__box {
     @include FCenter(space-between);
-    width: rem(450);
+    // width: rem(450);
   }
   &__filter {
     margin-left: rem(10);

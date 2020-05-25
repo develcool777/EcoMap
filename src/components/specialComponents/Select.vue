@@ -46,10 +46,10 @@ export default {
     }
   },
   mounted () {
-    this.hide = this.hide.bind(this)
-    this.clicked = this.clicked.bind(this)
-    this.selectedItem = this.selectedItem.bind(this)
-    this.selectItem = this.selectItem.bind(this)
+    // this.hide = this.hide.bind(this)
+    // this.clicked = this.clicked.bind(this)
+    // this.selectedItem = this.selectedItem.bind(this)
+    // this.selectItem = this.selectItem.bind(this)
     document.addEventListener('click', this.hide, true)
   },
   beforeDestroy () {
@@ -62,10 +62,9 @@ export default {
   font-size: rem(20);
   width: rem(130);
   position: relative;
+  margin: 0 10px;
   &__selected {
     position: relative;
-    // width: 92%;
-    // margin: rem(5) rem(10) rem(5) rem(10);
     padding: 5px;
     border: none;
     background: transparent;
