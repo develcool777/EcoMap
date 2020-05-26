@@ -2,7 +2,7 @@
   <div class="Event">
     <Header/>
     <EventContent :dataItems="items" :dataFilter="{cities, regions, countries, problems}"/>
-    <Pagination :current="currentPage()" :totalItems="totalItem" :perPage="perPage" @page-changed="changePage"/>
+    <Pagination :current="currentPage()" :totalItems="totalITem" :perPage="perPage" @page-changed="changePage"/>
     <Footer/>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
   },
   data () {
     return {
-      totalItem: 8,
+      // totalItem: null,
       perPage: 3,
       current: 1,
       items: [],
@@ -51,6 +51,12 @@ export default {
     },
     async changePage (page) {
       this.current = page
+    }
+  },
+  computed: {
+    totalITem () {
+      const totalItem = this.items.length
+      return totalItem
     }
   },
   async created () {

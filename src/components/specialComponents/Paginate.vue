@@ -25,15 +25,15 @@ export default {
     },
     totalItems: {
       type: Number,
-      default: 0
+      default: 2
     },
     perPage: {
       type: Number,
-      default: 9
+      default: 2
     },
     pageRange: {
       type: Number,
-      default: 1
+      default: 2
     }
   },
   methods: {

@@ -1,7 +1,7 @@
 <template>
   <div class="contentFixed">
     <div class="wrapper">
-      <div class="contentFixed__title">Fixed issues</div>
+      <div class="contentFixed__title">Fixed</div>
         <Filters :dataFilter="dataFilter"/>
       <div class="contentFixed__items">
         <Item v-for="(item, index) in dataItems"  :key="index" :fitem="item"/>

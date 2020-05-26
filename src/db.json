@@ -1,125 +1,192 @@
 {
-    "countries": [
-      {"id": 1, "name": "Ukraine"},
-      {"id": 2, "name": "Spain"}
-    ],
-    "regions": [
-      {"id": 1, "name": "Kievska"},
-      {"id": 2, "name": "New York"}
-    ],
-    "cities": [
-      {"id": 1, "name": "Kiev"},
-      {"id": 2, "name": "Chernivtsi"}
-    ],
-    "problems": [
-      {"id": 1, "name": "first"},
-      {"id": 2, "name": "second"}
-    ],
-    "items": [
-      {
+  "items": [
+    {
+      "id": 1,
+      "issue": {
         "id": 1,
-        "issue": {
-          "id": 1,
-          "title": "Beach trash",
-          "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
-          "url": "img1.png",
-          "state": "new",
-          "date": "2000-01-01",
-          "pollution_category": "trash",
-          "pollution_rating": 3.8,
-          "budget": null,
-          "comments": 12
-        }
-      },  
-      {
+        "title": "Beach trash",
+        "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
+        "url": "img1.png",
+        "state": "new",
+        "date": "2000-01-01",
+        "pollution_category": "trash",
+        "pollution_rating": 3.8,
+        "budget": null,
+        "comments": 12
+      }
+    },
+    {
+      "id": 2,
+      "issue": {
         "id": 2,
-        "issue": {
-          "id": 2,
-          "title": "Beach trash",
-          "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
-          "url": "img1.png",
-          "state": "new",
-          "date": "2000-01-01",
-          "pollution_category": "trash",
-          "pollution_rating": 3.8,
-          "budget": null,
-          "comments": 12
-        }
-      },
-      {
+        "title": "Beach trash",
+        "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
+        "url": "img1.png",
+        "state": "new",
+        "date": "2000-01-01",
+        "pollution_category": "trash",
+        "pollution_rating": 3.8,
+        "budget": null,
+        "comments": 12
+      }
+    },
+    {
+      "id": 3,
+      "issue": {
         "id": 3,
-        "issue": {
-          "id": 3,
-          "title": "Beach trash",
-          "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
-          "url": "img1.png",
-          "state": "new",
-          "date": "2000-01-01",
-          "pollution_category": "trash",
-          "pollution_rating": 3.8,
-          "budget": null,
-          "comments": 12
-        }
-      },
-      {
+        "title": "Beach trash",
+        "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
+        "url": "img1.png",
+        "state": "new",
+        "date": "2000-01-01",
+        "pollution_category": "trash",
+        "pollution_rating": 3.8,
+        "budget": null,
+        "comments": 12
+      }
+    },
+    {
+      "id": 4,
+      "issue": {
         "id": 4,
-        "issue": {
-          "id": 4,
-          "title": "Beach trash",
-          "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
-          "url": "img1.png",
-          "state": "new",
-          "date": "2000-01-01",
-          "pollution_category": "trash",
-          "pollution_rating": 3.8,
-          "budget": null,
-          "comments": 12
-        }
-      },
-      {
+        "title": "Beach trash",
+        "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
+        "url": "img1.png",
+        "state": "new",
+        "date": "2000-01-01",
+        "pollution_category": "trash",
+        "pollution_rating": 3.8,
+        "budget": null,
+        "comments": 12
+      }
+    },
+    {
+      "id": 5,
+      "issue": {
         "id": 5,
-        "issue": {
-          "id": 5,
-          "title": "Beach trash",
-          "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
-          "url": "img1.png",
-          "state": "new",
-          "date": "2000-01-01",
-          "pollution_category": "trash",
-          "pollution_rating": 3.8,
-          "budget": null,
-          "comments": 12
-        }
-      },
-      {
+        "title": "Beach trash",
+        "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
+        "url": "img1.png",
+        "state": "new",
+        "date": "2000-01-01",
+        "pollution_category": "trash",
+        "pollution_rating": 3.8,
+        "budget": null,
+        "comments": 12
+      }
+    },
+    {
+      "id": 6,
+      "issue": {
         "id": 6,
-        "issue": {
-          "id": 6,
-          "title": "Beach trash",
-          "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
-          "url": "img1.png",
-          "state": "new",
-          "date": "2000-01-01",
-          "pollution_category": "trash",
-          "pollution_rating": 3.8,
-          "budget": null,
-          "comments": 12
-        }
-      },
-      {
+        "title": "Beach trash",
+        "description": "helpful description helpful description helpful description helpful descriptionhelpful descriptionhelpful descriptionhelpful description helpful description helpful description helpful description",
+        "url": "img1.png",
+        "state": "new",
+        "date": "2000-01-01",
+        "pollution_category": "trash",
+        "pollution_rating": 3.8,
+        "budget": null,
+        "comments": 12
+      }
+    },
+    {
+      "id": 7,
+      "issue": {
         "id": 7,
-        "issue": {
-          "id": 7,
-          "title": "Beach trash",
-          "description": "helpful description",
-          "url": "img1.png",
-          "state": "new",
-          "date": "2000-01-01",
-          "pollution_category": "trash",
-          "pollution_rating": 3.8,
-          "budget": null,
-          "comments": 12
-        }
-      } 
-    ]
+        "title": "Beach trash",
+        "description": "helpful description",
+        "url": "img1.png",
+        "state": "new",
+        "date": "2000-01-01",
+        "pollution_category": "trash",
+        "pollution_rating": 3.8,
+        "budget": null,
+        "comments": 12
+      }
+    }
+  ],
+  "Events": [
+    {
+      "id": 1,
+      "Issue": "adscef",
+      "StartTime": "adscef",
+      "EndTime": "adscef",
+      "Place": "adscef",
+      "MaxParticipants": "adscef",
+      "DescribeProblem": "adscef"
+    },
+    {
+      "Issue": "sdcef",
+      "StartTime": "ecfvrg",
+      "EndTime": "dcfevg",
+      "Place": "cefvgr",
+      "MaxParticipants": "fevrg",
+      "DescribeProblem": "cefvrg",
+      "id": 2
+    },
+    {
+      "Issue": "sdcef",
+      "StartTime": "ecfvrg",
+      "EndTime": "dcfevg",
+      "Place": "cefvgr",
+      "MaxParticipants": "fevrg",
+      "DescribeProblem": "cefvrg",
+      "id": 3
+    },
+    {
+      "Issue": "sdcef",
+      "StartTime": "ecfvrg",
+      "EndTime": "dcfevg",
+      "Place": "cefvgr",
+      "MaxParticipants": "fevrg",
+      "DescribeProblem": "cefvrg",
+      "id": 4
+    },
+    {
+      "Issue": "sdcef",
+      "StartTime": "ecfvrg",
+      "EndTime": "dcfevg",
+      "Place": "cefvgr",
+      "MaxParticipants": "fevrg",
+      "DescribeProblem": "cefvrg",
+      "id": 5
+    },
+    {
+      "Issue": "sdcef",
+      "StartTime": "ecfvrg",
+      "EndTime": "dcfevg",
+      "Place": "cefvgr",
+      "MaxParticipants": "fevrg",
+      "DescribeProblem": "cefvrg",
+      "id": 6
+    },
+    {
+      "Issue": "sqxdwcefv",
+      "StartTime": "xdcefvgrbt",
+      "EndTime": "dwcfevgr",
+      "Place": "dcwfev",
+      "MaxParticipants": "cfevgr",
+      "DescribeProblem": "dcfevgr",
+      "id": 7
+    },
+    {
+      "Issue": "",
+      "StartTime": "",
+      "EndTime": "",
+      "Place": "",
+      "MaxParticipants": "",
+      "DescribeProblem": "",
+      "id": 8
+    },
+    {
+      "Issue": "",
+      "StartTime": "",
+      "EndTime": "",
+      "Place": "",
+      "MaxParticipants": "",
+      "DescribeProblem": "",
+      "id": 9
+    }
+  ]
 }
