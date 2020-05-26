@@ -1,6 +1,6 @@
 <template>
   <div class="Item">
-    <img :src=" require('../../assets/Items/' + fitem.issue.url )" alt="image" class="Item__img">
+    <img :src=" require('../../assets/Items/' + fitem.issue.photos )" alt="image" class="Item__img">
     <div class="Item__info">
       <div class="Item__title">{{ fitem.issue.title }}</div>
       <div class="Item__datePlace">
